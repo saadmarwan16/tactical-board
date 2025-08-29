@@ -1,0 +1,35 @@
+{
+  "Get the team by id": "https://api-football-v1.p.rapidapi.com/v3/teams?id=49",
+  "get": "teams",
+  "parameters": {
+    "id": "49"
+  },
+  "errors": [],
+  "results": 1,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "team": {
+        "id": 49,
+        "name": "Chelsea",
+        "code": "CHE",
+        "country": "England",
+        "founded": 1905,
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/49.png"
+      },
+      "venue": {
+        "id": 519,
+        "name": "Stamford Bridge",
+        "address": "Fulham Road",
+        "city": "London",
+        "capacity": 41841,
+        "surface": "grass",
+        "image": "https://media.api-sports.io/football/venues/519.png"
+      }
+    }
+  ]
+}

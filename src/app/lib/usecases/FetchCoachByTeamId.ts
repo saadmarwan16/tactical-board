@@ -1,10 +1,10 @@
 import type { BaseUsecase } from "@/base/baseUsecase";
+import { fetchWithZod } from "@/lib/createZodFetcher";
 import {
   CoachResponseSchema,
   type TCoach,
   type TCoachResponse,
 } from "../schemas/coach";
-import { fetchWithZod } from "@/lib/createZodFetcher";
 
 export class FetchCoachByTeamId implements BaseUsecase<number, TCoach> {
   async execute(id: number): Promise<TCoach> {
@@ -16,7 +16,7 @@ export class FetchCoachByTeamId implements BaseUsecase<number, TCoach> {
           "x-rapidapi-key":
             "ec34d9069dmsh0a9a3ec61c4f322p121e36jsn53f89b10a240",
         },
-      }
+      },
     );
 
     return this.transform(res);

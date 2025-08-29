@@ -1,7 +1,7 @@
 import type { FunctionComponent } from "react";
 import BasicInfoCard from "./BasicInfoCard";
-import VenueCard from "./VenueCard";
 import ManagerCard from "./ManagerCard";
+import VenueCard from "./VenueCard";
 
 const ClubInfo: FunctionComponent = () => {
   return (

@@ -1,10 +1,10 @@
 import type { BaseUsecase } from "@/base/baseUsecase";
+import { fetchWithZod } from "@/lib/createZodFetcher";
 import {
   SquadResponseSchema,
   type TSquad,
   type TSquadResponse,
 } from "../schemas/squad";
-import { fetchWithZod } from "@/lib/createZodFetcher";
 
 export class FetchSquadById implements BaseUsecase<number, TSquad> {
   async execute(id: number): Promise<TSquad> {
@@ -16,7 +16,7 @@ export class FetchSquadById implements BaseUsecase<number, TSquad> {
           "x-rapidapi-key":
             "ec34d9069dmsh0a9a3ec61c4f322p121e36jsn53f89b10a240",
         },
-      }
+      },
     );
 
     return this.transform(res);

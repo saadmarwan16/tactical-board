@@ -22,7 +22,7 @@ export const CoachResponseSchema = z.object({
       height: z.string().nullable(),
       weight: z.string().nullable(),
       photo: z.string().nullable(),
-    })
+    }),
   ),
 });
 

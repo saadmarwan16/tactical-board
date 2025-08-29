@@ -17,9 +17,9 @@ export const SquadResponseSchema = z.object({
           number: z.number().nullable(),
           position: z.string().nullable(),
           photo: z.string(),
-        })
+        }),
       ),
-    })
+    }),
   ),
 });
 

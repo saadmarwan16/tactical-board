@@ -1,4 +1,6 @@
-import { useState, type FunctionComponent } from "react";
+"use client";
+
+import { type FunctionComponent, useState } from "react";
 
 const FormationSelector: FunctionComponent = () => {
   const [selectedFormation, setSelectedFormation] = useState("4-3-3");

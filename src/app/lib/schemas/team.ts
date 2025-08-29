@@ -26,7 +26,7 @@ export const TeamResponseSchema = z.object({
         surface: z.string().nullable(),
         image: z.string().nullable(),
       }),
-    })
+    }),
   ),
 });
 

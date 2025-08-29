@@ -2,94 +2,14 @@
 
 import Image from "next/image";
 import type { FunctionComponent } from "react";
+import { useTeamStore } from "@/app/store/useTeamStore";
+import SquadEmpty from "./SquadEmpty";
+import SquadError from "./SquadError";
+import SquadLoading from "./SquadLoading";
 import SquadStatusCard from "./SquadStatusCard";
 
-type Player = {
-  id: number;
-  name: string;
-  position: string;
-  number: number;
-  age: number;
-  photo: string;
-  x?: number;
-  y?: number;
-};
-
 const Squad: FunctionComponent = () => {
-  const squad: Player[] = [
-    {
-      id: 1,
-      name: "David de Gea",
-      position: "GK",
-      number: 1,
-      age: 31,
-      photo: "https://media.api-sports.io/football/players/882.png",
-    },
-    {
-      id: 2,
-      name: "John Smith",
-      position: "CB",
-      number: 4,
-      age: 28,
-      photo: "https://media.api-sports.io/football/players/883.png",
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      position: "LB",
-      number: 3,
-      age: 26,
-      photo: "https://media.api-sports.io/football/players/884.png",
-    },
-    {
-      id: 4,
-      name: "Chris Wilson",
-      position: "RB",
-      number: 2,
-      age: 29,
-      photo: "https://media.api-sports.io/football/players/885.png",
-    },
-    {
-      id: 5,
-      name: "James Rodriguez",
-      position: "CM",
-      number: 8,
-      age: 27,
-      photo: "https://media.api-sports.io/football/players/886.png",
-    },
-    {
-      id: 6,
-      name: "Alex Thompson",
-      position: "CM",
-      number: 6,
-      age: 25,
-      photo: "https://media.api-sports.io/football/players/887.png",
-    },
-    {
-      id: 7,
-      name: "Robert Taylor",
-      position: "LW",
-      number: 11,
-      age: 24,
-      photo: "https://media.api-sports.io/football/players/888.png",
-    },
-    {
-      id: 8,
-      name: "Daniel Brown",
-      position: "RW",
-      number: 7,
-      age: 23,
-      photo: "https://media.api-sports.io/football/players/889.png",
-    },
-    {
-      id: 9,
-      name: "Kevin Martinez",
-      position: "ST",
-      number: 9,
-      age: 26,
-      photo: "https://media.api-sports.io/football/players/890.png",
-    },
-  ];
+  const { error, loading, squad } = useTeamStore();
 
   return (
     <div className="w-[30%] h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden border-l border-white/10 shadow-2xl">
@@ -97,20 +17,25 @@ const Squad: FunctionComponent = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,_rgba(120,119,198,0.1)_0%,_transparent_50%)]"></div>
 
       <div className="relative z-10 p-4 h-full overflow-y-auto">
-        <div className="space-y-4">
-          <div className="text-center">
-            <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-              Squad
-            </h2>
-            <div className="badge badge-outline bg-slate-700/50 border-slate-500 text-white shadow-lg backdrop-blur-sm">
-              4-3-3 Formation
+        {loading ? (
+          <SquadLoading />
+        ) : error ? (
+          <SquadError error={error} />
+        ) : !squad ? (
+          <SquadEmpty />
+        ) : (
+          <div className="space-y-4">
+            <div className="text-center">
+              <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                Squad
+              </h2>
+              <div className="badge badge-outline bg-slate-700/50 border-slate-500 text-white shadow-lg backdrop-blur-sm">
+                4-3-3 Formation
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            {squad
-              .filter((player) => squad.find((p) => p.id === player.id))
-              .map((player) => (
+            <div className="grid grid-cols-2 gap-3">
+              {squad.map((player) => (
                 <button
                   key={player.id}
                   type="button"
@@ -168,10 +93,11 @@ const Squad: FunctionComponent = () => {
                   </div>
                 </button>
               ))}
-          </div>
+            </div>
 
-          <SquadStatusCard />
-        </div>
+            <SquadStatusCard />
+          </div>
+        )}
       </div>
     </div>
   );

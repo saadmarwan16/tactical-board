@@ -1,10 +1,13 @@
+import Image from "next/image";
 import type { FunctionComponent } from "react";
 
 const Pitch: FunctionComponent = () => {
+  const filled = [8, 11, 15, 22, 24, 28, 36, 40, 42, 44, 48];
+
   return (
     <div className="w-[50%] h-full relative overflow-hidden shadow-2xl border-x border-white/10">
       {/* Football Pitch */}
-      <div className="w-full h-full relative bg-gradient-to-b from-green-400 via-green-500 to-green-600">
+      <div className="w-full h-full absolute bg-gradient-to-b from-green-400 via-green-500 to-green-600">
         {/* Grass texture overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-400/30 to-transparent"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,255,255,0.1)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-30"></div>
@@ -50,6 +53,38 @@ const Pitch: FunctionComponent = () => {
           <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-800 border border-white rounded shadow-xl"></div>
           <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-800 border border-white rounded shadow-xl"></div>
         </div>
+      </div>
+      <div className="w-full h-full absolute grid grid-cols-5 grid-rows-10 p-6">
+        {/* Grid Items */}
+        {[...Array(50).keys()].map((val, index) => {
+          if (filled.includes(index + 1)) {
+            return (
+              <div key={val} className="avatar items-center justify-center">
+                <div className="w-12 rounded-full">
+                  <Image
+                    src="https://media.api-sports.io/football/teams/49.png"
+                    alt="Image of player"
+                    width={48}
+                    height={48}
+                  />
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div
+              key={val}
+              className="border border-white/10 flex items-center justify-center"
+            />
+            // <div
+            //   key={index}
+            //   className="border border-white/10 flex items-center justify-center"
+            // >
+            //   {index + 1}
+            // </div>
+          );
+        })}
       </div>
     </div>
   );

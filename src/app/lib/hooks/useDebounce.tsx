@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchStore } from "@/app/store";
+import { useSearchStore } from "@/app/store/useSearchStore";
 
 export const useDebounce = (value: string, delay: number = 500) => {
   const [debouncedValue, setDebouncedValue] = useState(value);

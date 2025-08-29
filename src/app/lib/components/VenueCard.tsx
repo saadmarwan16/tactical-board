@@ -1,6 +1,11 @@
 import type { FunctionComponent } from "react";
+import type { TTeam } from "../schemas/team";
 
-const VenueCard: FunctionComponent = () => {
+interface VenueCardProps {
+  venue: TTeam["venue"];
+}
+
+const VenueCard: FunctionComponent<VenueCardProps> = ({ venue }) => {
   return (
     <div className="card bg-gradient-to-br from-slate-700/50 to-slate-800/50 backdrop-blur-sm shadow-xl border border-white/10">
       <div className="card-body p-4 relative">
@@ -8,22 +13,22 @@ const VenueCard: FunctionComponent = () => {
         <div className="flex items-center gap-2 mb-2 relative z-10">
           <span className="text-lg">🏟️</span>
           <h3 className="card-title text-sm text-white font-bold">
-            STAMFORD BRIDGE
+            {venue.name.toUpperCase()}
           </h3>
         </div>
 
         <div className="space-y-2 text-xs text-white/70 relative z-10">
           <div className="flex justify-between">
             <span>Location:</span>
-            <span className="text-white font-medium">London</span>
+            <span className="text-white font-medium">{venue.location}</span>
           </div>
           <div className="flex justify-between">
             <span>Capacity:</span>
-            <span className="text-white font-medium">40,834</span>
+            <span className="text-white font-medium">{venue.capacity}</span>
           </div>
           <div className="flex justify-between">
             <span>Surface:</span>
-            <span className="text-white font-medium">Grass</span>
+            <span className="text-white font-medium">{venue.surface}</span>
           </div>
         </div>
       </div>

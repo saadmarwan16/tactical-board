@@ -1,21 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { FunctionComponent } from "react";
-import { useSearchStore } from "@/app/store";
+import { useSearchStore } from "@/app/store/useSearchStore";
 import { useDebounce } from "../hooks/useDebounce";
-import type { TTeams } from "../schemas/teams";
 
 const SearchBar: FunctionComponent = () => {
   const { query, results, updateQuery, dropdownOpen, updateDropdownOpen } =
     useSearchStore();
   const debouncedQuery = useDebounce(query, 1000);
-
-  const handleSuggestionClick = (club: TTeams) => {
-    updateQuery(club.name);
-    updateDropdownOpen(false);
-    // TODO: Implement club selection logic
-  };
 
   return (
     <div className="relative z-10">
@@ -39,11 +33,10 @@ const SearchBar: FunctionComponent = () => {
             <div className="card-body p-2">
               {results.length > 0 ? (
                 results.slice(0, 8).map((club) => (
-                  <button
+                  <Link
+                    href={`?id=${club.id}`}
                     key={club.id}
-                    type="button"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700/50 transition-colors duration-200 text-left w-full"
-                    onClick={() => handleSuggestionClick(club)}
                   >
                     <div className="avatar">
                       <div className="w-8 rounded-full bg-slate-700 flex items-center justify-center">
@@ -70,7 +63,7 @@ const SearchBar: FunctionComponent = () => {
                       </div>
                       <div className="text-xs text-slate-400">{club.venue}</div>
                     </div>
-                  </button>
+                  </Link>
                 ))
               ) : (
                 <div className="text-center text-white/60 text-sm py-4">

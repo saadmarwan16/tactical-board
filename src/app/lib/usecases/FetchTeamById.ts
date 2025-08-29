@@ -6,8 +6,8 @@ import {
   type TTeamResponse,
 } from "../schemas/team";
 
-export class FetchTeamById implements BaseUsecase<number, TTeam> {
-  async execute(id: number): Promise<TTeam> {
+export class FetchTeamById implements BaseUsecase<string, TTeam> {
+  async execute(id: string): Promise<TTeam> {
     const res = await fetchWithZod(
       TeamResponseSchema,
       `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`,

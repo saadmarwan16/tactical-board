@@ -1,10 +1,17 @@
-import ClubInfo from "./lib/components/ClubInfo";
+import type { FunctionComponent } from "react";
 import FormationSelector from "./lib/components/FormationSelector";
-import Pitch from "./lib/components/Pitch";
+import MainContent from "./lib/components/MainContent";
 import SearchBar from "./lib/components/SearchBar";
-import Squad from "./lib/components/Squad";
 
-const Home = () => {
+interface HomePageProps {
+  searchParams: Promise<{
+    id: string;
+  }>;
+}
+
+const HomePage: FunctionComponent<HomePageProps> = async ({ searchParams }) => {
+  const { id } = await searchParams;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
@@ -37,13 +44,9 @@ const Home = () => {
         <FormationSelector />
       </div>
 
-      <div className="h-[calc(100vh-80px)] bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm flex overflow-hidden relative z-1">
-        <ClubInfo />
-        <Pitch />
-        <Squad />
-      </div>
+      <MainContent id={id} />
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

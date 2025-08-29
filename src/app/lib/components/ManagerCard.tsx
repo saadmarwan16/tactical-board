@@ -1,6 +1,11 @@
 import type { FunctionComponent } from "react";
+import type { TCoach } from "../schemas/coach";
 
-const ManagerCard: FunctionComponent = () => {
+interface ManagerCardProps {
+  coach: TCoach;
+}
+
+const ManagerCard: FunctionComponent<ManagerCardProps> = ({ coach }) => {
   return (
     <div className="card bg-gradient-to-br from-slate-700/50 to-slate-800/50 backdrop-blur-sm shadow-xl border border-white/10">
       <div className="card-body p-4 relative">
@@ -13,19 +18,19 @@ const ManagerCard: FunctionComponent = () => {
         <div className="space-y-2 relative z-10">
           <div className="flex justify-between text-xs">
             <span className="text-white/70">Name:</span>
-            <span className="text-white font-medium">Enzo Maresca</span>
+            <span className="text-white font-medium">{coach.name}</span>
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-white/70">Role:</span>
-            <span className="text-white font-medium">Head Coach</span>
+            <span className="text-white font-medium">{coach.role}</span>
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-white/70">Age:</span>
-            <span className="text-white font-medium">44</span>
+            <span className="text-white font-medium">{coach.age}</span>
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-white/70">Nationality:</span>
-            <span className="text-white font-medium">Italian</span>
+            <span className="text-white font-medium">{coach.nationality}</span>
           </div>
         </div>
       </div>

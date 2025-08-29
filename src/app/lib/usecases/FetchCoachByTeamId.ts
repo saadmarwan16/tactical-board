@@ -6,8 +6,8 @@ import {
   type TCoachResponse,
 } from "../schemas/coach";
 
-export class FetchCoachByTeamId implements BaseUsecase<number, TCoach> {
-  async execute(id: number): Promise<TCoach> {
+export class FetchCoachByTeamId implements BaseUsecase<string, TCoach> {
+  async execute(id: string): Promise<TCoach> {
     const res = await fetchWithZod(
       CoachResponseSchema,
       `https://api-football-v1.p.rapidapi.com/v3/coachs?team=${id}`,

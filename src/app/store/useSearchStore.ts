@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { TTeams } from "./lib/schemas/teams";
-import { FetchTeamsByName } from "./lib/usecases/FetchTeamsByName";
+import type { TTeams } from "../lib/schemas/teams";
+import { FetchTeamsByName } from "../lib/usecases/FetchTeamsByName";
 
 interface SearchState {
   query: string;
@@ -21,6 +21,8 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     return set(() => ({ query: newQuery }));
   },
   onDebouncedQueryChange: async (value: string) => {
+    if (!value) return;
+
     const teams = await new FetchTeamsByName().execute(value);
     return set(() => ({ results: teams }));
   },

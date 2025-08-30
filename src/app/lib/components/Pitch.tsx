@@ -1,8 +1,11 @@
 import Image from "next/image";
 import type { FunctionComponent } from "react";
+import { useFormationStore } from "@/app/store/useFormationStore";
+import { formations } from "../data/formations";
 
 const Pitch: FunctionComponent = () => {
-  const filled = [8, 11, 15, 22, 24, 28, 36, 40, 42, 44, 48];
+  // const filled = [8, 11, 15, 22, 24, 28, 36, 40, 42, 44, 48];
+  const { formation } = useFormationStore();
 
   return (
     <div className="w-[50%] h-full relative overflow-hidden shadow-2xl border-x border-white/10">
@@ -57,7 +60,7 @@ const Pitch: FunctionComponent = () => {
       <div className="w-full h-full absolute grid grid-cols-5 grid-rows-10 p-6">
         {/* Grid Items */}
         {[...Array(50).keys()].map((val, index) => {
-          if (filled.includes(index + 1)) {
+          if (formations[formation].includes(index + 1)) {
             return (
               <div key={val} className="avatar items-center justify-center">
                 <div className="w-12 rounded-full">
@@ -73,16 +76,16 @@ const Pitch: FunctionComponent = () => {
           }
 
           return (
+            // <div
+            //   key={val}
+            //   className="border border-white/10 flex items-center justify-center"
+            // />
             <div
               key={val}
               className="border border-white/10 flex items-center justify-center"
-            />
-            // <div
-            //   key={index}
-            //   className="border border-white/10 flex items-center justify-center"
-            // >
-            //   {index + 1}
-            // </div>
+            >
+              {index + 1}
+            </div>
           );
         })}
       </div>

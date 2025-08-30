@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import type { FunctionComponent } from "react";
+import { useFormationStore } from "@/app/store/useFormationStore";
 import { useTeamStore } from "@/app/store/useTeamStore";
 import SquadEmpty from "./SquadEmpty";
 import SquadError from "./SquadError";
@@ -10,6 +11,7 @@ import SquadStatusCard from "./SquadStatusCard";
 
 const Squad: FunctionComponent = () => {
   const { error, loading, squad } = useTeamStore();
+  const { formation } = useFormationStore();
 
   return (
     <div className="w-[30%] h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden border-l border-white/10 shadow-2xl">
@@ -30,7 +32,7 @@ const Squad: FunctionComponent = () => {
                 Squad
               </h2>
               <div className="badge badge-outline bg-slate-700/50 border-slate-500 text-white shadow-lg backdrop-blur-sm">
-                4-3-3 Formation
+                {formation} Formation
               </div>
             </div>
 
